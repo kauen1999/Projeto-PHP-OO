@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Tarefa</title>
+    <script>
+        function mostrarCamposEspecificos() {
+            var tipoTarefa = document.getElementById("tipo").value;
+            var camposPessoais = document.getElementById("camposPessoais");
+            var camposProfissionais = document.getElementById("camposProfissionais");
+
+            if (tipoTarefa === "Pessoal") {
+                camposPessoais.style.display = "block";
+                camposProfissionais.style.display = "none";
+            } else if (tipoTarefa === "Profissional") {
+                camposPessoais.style.display = "none";
+                camposProfissionais.style.display = "block";
+            } else {
+                camposPessoais.style.display = "none";
+                camposProfissionais.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Cadastrar Tarefa</h2>
+    <form action="../config/cadastrar_tarefa.php" method="POST">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required><br><br>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" required></textarea><br><br>
+
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" onchange="mostrarCamposEspecificos()" required>
+            <option value="">Selecione</option>
+            <option value="Pessoal">Tarefa Pessoal</option>
+            <option value="Profissional">Tarefa Profissional</option>
+        </select><br><br>
+
+        <label for="prioridade">Prioridade:</label>
+        <input type="text" id="prioridade" name="prioridade" required><br><br>
+
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br><br>
+
+        <!-- Campos específicos para Tarefa Pessoal -->
+        <div id="camposPessoais" style="display: none;">
+            <label for="data_pessoal">Data Pessoal:</label>
+            <input type="date" id="data_pessoal" name="data_pessoal"><br><br>
+
+            <label for="hora_pessoal">Hora Pessoal:</label>
+            <input type="time" id="hora_pessoal" name="hora_pessoal"><br><br>
+        </div>
+
+        <!-- Campos específicos para Tarefa Profissional -->
+        <div id="camposProfissionais" style="display: none;">
+            <label for="projeto">Projeto:</label>
+            <input type="text" id="projeto" name="projeto"><br><br>
+
+            <label for="prazo">Prazo:</label>
+            <input type="text" id="prazo" name="prazo"><br><br>
+        </div>
+
+        <!-- Botão de submit -->
+        <input type="submit" value="Cadastrar">
+    </form>
+</body>
+</html>
